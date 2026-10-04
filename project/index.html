@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Technical audit instrument for engineering projects and resume evidence with ATS readiness diagnostics." />
+    <meta property="og:title" content="AI Project & Resume Auditor" />
+    <meta property="og:description" content="Technical audit instrument for engineering projects and resume evidence with ATS readiness diagnostics." />
+    <title>AI Project & Resume Auditor | Technical Evaluation Instrument</title>
+    
+    <!-- Tailwind CSS (Play CDN for rapid prototyping) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              canvas: '#090d16',
+              panel: '#0f1420',
+              card: '#141b2b',
+              accent: '#3b82f6',
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+          },
+        },
+      };
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  
+  <body class="bg-[#090d16] text-slate-200 min-h-screen antialiased flex flex-col justify-between">
+    <!-- ================= HEADER ================= -->
+    <header class="sticky top-0 z-50 border-b border-slate-800/90 bg-[#090d16]/90 backdrop-blur-md">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 gap-4">
+          <!-- Logo & Title -->
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-9 h-9 rounded-lg bg-blue-950/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <h1 class="text-sm sm:text-base font-semibold text-white tracking-tight leading-none truncate">
+                  AI Project &amp; Resume Auditor
+                </h1>
+                <span class="hidden sm:inline-flex items-center rounded border border-slate-700/80 bg-slate-800/60 px-1.5 py-0.5 text-[10px] font-mono text-slate-300">
+                  v2.0
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-400 truncate mt-0.5">
+                Technical Evaluation Instrument &amp; ATS Diagnostics
+              </p>
+            </div>
+          </div>
+
+          <!-- Utility Badges -->
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-700/80 bg-slate-800/40 px-3 py-1 text-xs text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span class="hidden md:inline font-mono text-[11px]">Audit Engine:</span>
+              <span class="font-mono text-[11px] text-slate-200">Gemini 3.8 / Offline</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= MAIN LAYOUT ================= -->
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- ============ LEFT COLUMN: INPUT FORM (5 cols) ============ -->
+        <section aria-labelledby="form-heading" class="lg:col-span-5 rounded-xl border border-slate-800 bg-[#0f1420] p-5 sm:p-6 shadow-sm">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-5">
+            <div>
+              <h2 id="form-heading" class="text-sm font-semibold text-white uppercase tracking-wider font-mono">
+                Project &amp; Profile Inputs
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">Specify technical details for evaluation</p>
+            </div>
+            
+            <button type="button" id="load-sample-btn"
+              class="inline-flex items-center gap-1.5 rounded-md border border-blue-500/30 bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-300 transition-colors hover:bg-blue-500/20 hover:text-white"
+              title="Fill form with sample student project data">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              <span>Load Example</span>
+            </button>
+          </div>
+
+          <form id="audit-form" novalidate class="space-y-4">
+            <!-- 1. Candidate Name -->
+            <div>
+              <label for="student-name" class="block text-xs font-mono font-medium uppercase tracking-wider text-slate-300 mb-1.5">
+                Student / Candidate Name <span class="text-rose-400">*</span>
+              </label>
+              <input type="text" id="student-name" name="studentName" required
+                class="w-full rounded-lg border border-slate-700/80 bg-[#090d16] px-3.5 py-2 text-sm text-white placeholder-slate-500 transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                placeholder="e.g. Alex Chen" />
+              <p class="hidden text-xs text-rose-400 mt-1" data-error-for="studentName"></p>
+            </div>
+
+            <!-- 2. Project Title -->
+            <div>
+              <label for="project-title" class="block text-xs font-mono font-medium uppercase tracking-wider text-slate-300 mb-1.5">
+                Project Title <span class="text-rose-400">*</span>
+              </label>
+              <input type="text" id="project-title" name="projectTitle" required
+                class="w-full rounded-lg border border-slate-700/80 bg-[#090d16] px-3.5 py-2 text-sm text-white placeholder-slate-500 transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                placeholder="e.g. Distributed Task Queue &amp; Job Scheduler" />
+              <p class="hidden text-xs text-rose-400 mt-1" data-error-for="projectTitle"></p>
+            </div>
+
+            <!-- 3. Tech Stack -->
+            <div>
+              <label for="tech-stack" class="block text-xs font-mono font-medium uppercase tracking-wider text-slate-300 mb-1.5">
+                Technology Stack
+              </label>
+              <input type="text" id="tech-stack" name="techStack"
+                class="w-full rounded-lg border border-slate-700/80 bg-[#090d16] px-3.5 py-2 text-sm text-white placeholder-slate-500 transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                placeholder="e.g. Go, Redis, PostgreSQL, Docker, Prometheus" />
+              <p class="text-[11px] text-slate-500 mt-1">Comma-separated tools, languages, and frameworks used.</p>
+            </div>
+
+            <!-- 4. Resume Bullet Points -->
+            <div>
+              <label for="resume-bullets" class="block text-xs font-mono font-medium uppercase tracking-wider text-slate-300 mb-1.5">
+                Resume Bullet Points / Statements
+              </label>
+              <textarea id="resume-bullets" name="resumeBullets" rows="5"
+                class="w-full rounded-lg border border-slate-700/80 bg-[#090d16] px-3.5 py-2 text-sm text-white placeholder-slate-500 transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none resize-y font-sans leading-relaxed"
+                placeholder="• Developed worker pool to process background jobs asynchronously&#10;• Added retry logic for failed jobs and PostgreSQL transactions&#10;• Deployed application with Docker and configured monitoring endpoints"></textarea>
+              <p class="text-[11px] text-slate-500 mt-1">Enter one bullet per line. The auditor will evaluate impact and technical clarity.</p>
+            </div>
+
+            <!-- 5. GitHub Link -->
+            <div>
+              <label for="github-link" class="block text-xs font-mono font-medium uppercase tracking-wider text-slate-300 mb-1.5">
+                Repository / Documentation URL <span class="text-slate-500 font-normal lowercase">(optional)</span>
+              </label>
+              <input type="url" id="github-link" name="githubLink"
+                class="w-full rounded-lg border border-slate-700/80 bg-[#090d16] px-3.5 py-2 text-sm text-white placeholder-slate-500 transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                placeholder="https://github.com/username/project" />
+              <p class="hidden text-xs text-rose-400 mt-1" data-error-for="githubLink"></p>
+            </div>
+
+            <!-- 6. Gemini API Key -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="gemini-key" class="block text-xs font-mono font-medium uppercase tracking-wider text-slate-300">
+                  Google Gemini API Key <span class="text-slate-500 font-normal lowercase">(optional)</span>
+                </label>
+              </div>
+              <div class="relative">
+                <input type="password" id="gemini-key" name="geminiApiKey"
+                  class="w-full rounded-lg border border-slate-700/80 bg-[#090d16] px-3.5 py-2 pr-10 text-sm text-white placeholder-slate-500 transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none font-mono"
+                  placeholder="AIzaSy..." autocomplete="off" />
+                <button type="button" id="toggle-key-visibility" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors" aria-label="Toggle API key visibility">
+                  <svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+              
+              <!-- Subtle Mode Info Callout -->
+              <div class="mt-2 rounded-lg border border-slate-800 bg-[#090d16] p-2.5 flex items-start gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" class="w-4 h-4 flex-shrink-0 mt-0.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="16" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <p class="text-[11px] text-slate-400 leading-normal">
+                  <strong class="text-slate-300">Offline Demo Mode:</strong> Leave blank to evaluate with deterministic local rules. Your API key is used strictly in-browser and never persisted.
+                </p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+              <button type="submit" id="run-audit-btn"
+                class="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0f1420] disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg id="run-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                <svg id="loading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 hidden animate-spin">
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+                <span id="run-btn-text">Run Technical Audit</span>
+              </button>
+              
+              <button type="button" id="clear-form-btn"
+                class="sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-transparent px-4 py-2.5 text-xs font-mono font-medium text-slate-300 transition-colors hover:border-slate-600 hover:bg-slate-800/40 hover:text-white">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+                  <path d="M3 6h18"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                <span>Reset</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============ RIGHT COLUMN: AUDIT DASHBOARD (7 cols) ============ -->
+        <section aria-labelledby="dashboard-heading" class="lg:col-span-7 space-y-5">
+          <h2 id="dashboard-heading" class="sr-only">Technical Audit Dashboard</h2>
+
+          <!-- 1. EMPTY STANDBY STATE -->
+          <div id="dashboard-empty-state" class="rounded-xl border border-dashed border-slate-800 bg-[#0f1420]/80 p-8 text-center flex flex-col items-center justify-center min-h-[580px]">
+            <div class="w-14 h-14 rounded-xl bg-slate-800/60 border border-slate-700/80 flex items-center justify-center text-slate-400 mb-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7 text-blue-400">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            
+            <h3 class="text-base font-semibold text-white tracking-tight">
+              Audit Instrument Standby
+            </h3>
+            <p class="text-xs text-slate-400 max-w-md mt-1 mb-6 leading-relaxed">
+              Submit your project specifications or load an example to generate an objective technical audit covering architecture, recruiter evidence, and ATS readiness.
+            </p>
+
+            <!-- Diagnostic Pillars -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-lg text-left mb-6">
+              <div class="rounded-lg border border-slate-800 bg-[#090d16] p-3">
+                <div class="text-[10px] font-mono text-blue-400 uppercase font-semibold mb-1">Pillar 01</div>
+                <div class="text-xs font-semibold text-slate-200">Architecture</div>
+                <p class="text-[11px] text-slate-400 mt-1 leading-normal">Evaluates tech stack cohesion &amp; engineering complexity.</p>
+              </div>
+              <div class="rounded-lg border border-slate-800 bg-[#090d16] p-3">
+                <div class="text-[10px] font-mono text-emerald-400 uppercase font-semibold mb-1">Pillar 02</div>
+                <div class="text-xs font-semibold text-slate-200">Recruiter Impact</div>
+                <p class="text-[11px] text-slate-400 mt-1 leading-normal">Audits action verbs, metrics, and technical evidence.</p>
+              </div>
+              <div class="rounded-lg border border-slate-800 bg-[#090d16] p-3">
+                <div class="text-[10px] font-mono text-amber-400 uppercase font-semibold mb-1">Pillar 03</div>
+                <div class="text-xs font-semibold text-slate-200">ATS Matching</div>
+                <p class="text-[11px] text-slate-400 mt-1 leading-normal">Diagnoses keyword presence and parser compatibility.</p>
+              </div>
+            </div>
+
+            <button type="button" id="empty-state-sample-btn"
+              class="inline-flex items-center gap-2 rounded-lg border border-blue-500/40 bg-blue-500/10 px-4 py-2 text-xs font-mono font-medium text-blue-300 transition-colors hover:bg-blue-500/20 hover:text-white">
+              <span>Load Example &amp; Run Audit</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- 2. TECHNICAL ERROR STATE (Hidden by default) -->
+          <div id="dashboard-error-state" class="hidden rounded-xl border border-rose-500/40 bg-rose-500/5 p-6 text-slate-200 space-y-3">
+            <div class="flex items-center gap-2 text-rose-400">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 flex-shrink-0">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <h3 class="text-sm font-semibold font-mono uppercase tracking-wider">Audit Execution Error</h3>
+            </div>
+            <p id="error-message-text" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans"></p>
+            <p class="text-xs text-slate-400">
+              Check your API key permissions, network connection, or leave the API key empty to test in Offline Demo Mode.
+            </p>
+          </div>
+
+          <!-- 3. ACTIVE DASHBOARD CONTENT (Hidden until audit runs) -->
+          <div id="dashboard-content" class="hidden space-y-5 animate-fade-in">
+            
+            <!-- Top Status Bar -->
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">Report Status:</span>
+                <span id="audit-mode-chip"></span>
+              </div>
+            </div>
+
+            <!-- EXECUTIVE SCOREBOARD (Dual Gauges + Dimension Bars) -->
+            <div class="rounded-xl border border-slate-800 bg-[#0f1420] p-5 sm:p-6 shadow-sm space-y-5">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                <h3 class="text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
+                  Executive Scorecard &amp; Diagnostics
+                </h3>
+                <span class="text-[11px] font-mono text-slate-400">Scale: 0 — 100</span>
+              </div>
+
+              <!-- Dual Gauges -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                <!-- Gauge 1: Overall Score -->
+                <div class="flex items-center gap-4 rounded-lg border border-slate-800/80 bg-[#090d16] p-4">
+                  <div class="relative w-24 h-24 flex-shrink-0">
+                    <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
+                      <circle cx="50" cy="50" r="45" fill="none" stroke="#1e2738" stroke-width="7" />
+                      <circle id="overall-score-ring" cx="50" cy="50" r="45" fill="none" stroke="#3b82f6" stroke-width="7"
+                        stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283"
+                        class="score-gauge-ring" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                      <span id="overall-score-value" class="text-2xl font-bold font-mono text-white leading-none">—</span>
+                      <span class="text-[9px] font-mono text-slate-500 uppercase mt-0.5">overall</span>
+                    </div>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2">
+                      <h4 class="text-xs font-semibold text-white tracking-tight">Project &amp; Resume</h4>
+                      <span id="overall-score-badge"></span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1 leading-normal">
+                      Holistic rating of architectural scope and documented engineering quality.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Gauge 2: ATS Score -->
+                <div class="flex items-center gap-4 rounded-lg border border-slate-800/80 bg-[#090d16] p-4">
+                  <div class="relative w-24 h-24 flex-shrink-0">
+                    <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
+                      <circle cx="50" cy="50" r="45" fill="none" stroke="#1e2738" stroke-width="7" />
+                      <circle id="ats-score-ring" cx="50" cy="50" r="45" fill="none" stroke="#10b981" stroke-width="7"
+                        stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283"
+                        class="score-gauge-ring" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                      <span id="ats-score-value" class="text-2xl font-bold font-mono text-white leading-none">—</span>
+                      <span class="text-[9px] font-mono text-slate-500 uppercase mt-0.5">ATS</span>
+                    </div>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2">
+                      <h4 class="text-xs font-semibold text-white tracking-tight">ATS Readiness</h4>
+                      <span id="ats-score-badge"></span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1 leading-normal">
+                      Automated recruiter parser compatibility and keyword frequency.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dimension Progress Bars -->
+              <div class="rounded-lg border border-slate-800/80 bg-[#090d16] p-4 space-y-3">
+                <div class="text-[11px] font-mono text-slate-400 uppercase font-medium">Dimension Metrics</div>
+                
+                <!-- Dimension 1 -->
+                <div>
+                  <div class="flex justify-between text-xs mb-1">
+                    <span class="text-slate-300 font-medium">Technical Depth &amp; Complexity</span>
+                    <span id="dim-technical-val" class="font-mono text-slate-400">—</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="dim-technical-bar" class="dim-progress-bar h-full rounded-full bg-blue-500" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <!-- Dimension 2 -->
+                <div>
+                  <div class="flex justify-between text-xs mb-1">
+                    <span class="text-slate-300 font-medium">Bullet Impact &amp; Evidence</span>
+                    <span id="dim-impact-val" class="font-mono text-slate-400">—</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="dim-impact-bar" class="dim-progress-bar h-full rounded-full bg-emerald-500" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <!-- Dimension 3 -->
+                <div>
+                  <div class="flex justify-between text-xs mb-1">
+                    <span class="text-slate-300 font-medium">ATS Keyword Alignment</span>
+                    <span id="dim-ats-val" class="font-mono text-slate-400">—</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="dim-ats-bar" class="dim-progress-bar h-full rounded-full bg-amber-500" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- "What This Means" Verdict Card -->
+              <div class="rounded-lg border border-slate-800 bg-slate-900/50 p-4">
+                <div class="text-[11px] font-mono uppercase text-blue-400 font-medium mb-1.5 flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+                  <span>Recruiter &amp; Technical Diagnosis</span>
+                </div>
+                <p id="audit-verdict-text" class="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans"></p>
+              </div>
+            </div>
+
+            <!-- AUDIT FINDINGS: STRENGTHS & IMPROVEMENTS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <!-- Strengths -->
+              <div class="rounded-xl border border-slate-800 bg-[#0f1420] p-5 shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-slate-800/80 pb-3">
+                  <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                  <h3 class="text-xs font-mono font-semibold text-white uppercase tracking-wider">
+                    Demonstrated Strengths
+                  </h3>
+                </div>
+                <div id="strengths-list" class="space-y-2.5"></div>
+              </div>
+
+              <!-- Gaps & Improvements -->
+              <div class="rounded-xl border border-slate-800 bg-[#0f1420] p-5 shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-slate-800/80 pb-3">
+                  <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                  <h3 class="text-xs font-mono font-semibold text-white uppercase tracking-wider">
+                    Gaps &amp; Recruiter Flags
+                  </h3>
+                </div>
+                <div id="improvements-list" class="space-y-2.5"></div>
+              </div>
+            </div>
+
+            <!-- ATS KEYWORD INTELLIGENCE -->
+            <div class="rounded-xl border border-slate-800 bg-[#0f1420] p-5 shadow-sm space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                <div class="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" class="w-4 h-4">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                  </svg>
+                  <h3 class="text-xs font-mono font-semibold text-white uppercase tracking-wider">
+                    ATS &amp; Keyword Diagnostics
+                  </h3>
+                </div>
+                <span class="text-[11px] font-mono text-slate-400">Recruiter Parser Check</span>
+              </div>
+              <div id="ats-analysis-container"></div>
+            </div>
+
+            <!-- ACTIONABLE BULLET REWRITES -->
+            <div class="rounded-xl border border-slate-800 bg-[#0f1420] p-5 shadow-sm space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                <div class="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" class="w-4 h-4">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  <h3 class="text-xs font-mono font-semibold text-white uppercase tracking-wider">
+                    Audited Resume Bullets (Before &amp; After)
+                  </h3>
+                </div>
+                <span class="text-[11px] font-mono text-slate-400">Action-Oriented Rewrites</span>
+              </div>
+              
+              <p class="text-xs text-slate-400">
+                Weak bullet points are rewritten with high-signal engineering verbs and technical context. Click <strong class="text-slate-300">Copy</strong> to paste into your resume.
+              </p>
+              
+              <div id="bullet-rewrites-container" class="space-y-3"></div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="border-t border-slate-800/80 bg-[#090d16] mt-10">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <p class="text-xs text-slate-500 font-sans">
+          AI Project &amp; Resume Auditor &mdash; Technical evaluation tool for students and developers.
+        </p>
+        <p class="text-xs text-slate-500 font-mono">
+          Client-Side Processing &bull; No Persistent Credential Storage
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

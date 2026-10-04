@@ -10,34 +10,41 @@
  */
 
 import { collectFormData, validateForm, clearErrors } from './form.js';
-import { callGemini, hasApiKey } from './gemini.js';
+import { callGemini, getDemoResults } from './gemini.js';
 
 const GAUGE_CIRCUMFERENCE = 283; // 2 * PI * 45 for r=45
 
 /**
  * Main execution handler triggered on form submit.
+ * Dispatches to /api/audit or evaluates offline if forced.
+ * @param {Object} [options]
  */
-export async function runAudit() {
+export async function runAudit(options = {}) {
   const errors = validateForm();
   if (errors) return;
 
   const formData = collectFormData();
-  const isDemoMode = !hasApiKey(formData.geminiApiKey);
 
-  setButtonLoading(true, isDemoMode);
-  showLoadingState(isDemoMode);
+  if (options.forceDemo) {
+    setButtonLoading(true, true);
+    showLoadingState(true);
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    const demoResults = getDemoResults(formData);
+    renderAuditResults(demoResults, true);
+    setButtonLoading(false, true);
+    return;
+  }
+
+  setButtonLoading(true, false);
+  showLoadingState(false);
 
   try {
-    if (isDemoMode) {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-    }
-
     const results = await callGemini(formData);
-    renderAuditResults(results, isDemoMode);
+    renderAuditResults(results, false);
   } catch (err) {
-    renderError(err.message || 'An unexpected error occurred during analysis.');
+    renderError(err.message || 'An unexpected error occurred during analysis.', err.code, formData);
   } finally {
-    setButtonLoading(false, isDemoMode);
+    setButtonLoading(false, false);
   }
 }
 

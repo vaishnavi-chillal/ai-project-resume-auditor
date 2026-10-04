@@ -24,7 +24,6 @@ export function collectFormData() {
     techStack: (data.get('techStack') || '').trim(),
     resumeBullets: bullets,
     githubLink: (data.get('githubLink') || '').trim(),
-    geminiApiKey: (data.get('geminiApiKey') || '').trim(),
   };
 }
 
